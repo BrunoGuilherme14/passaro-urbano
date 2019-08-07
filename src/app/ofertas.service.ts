@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Ofertas } from './shared/ofertas.model';
 import {URL_API}  from './url.api';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OfertasService {
@@ -10,6 +11,10 @@ export class OfertasService {
         return this.http.get(`${URL_API}?id=${id}`)
             .toPromise()
             .then((res:any) => res.shift())
+    }
+    public getOfertasObsByTermo(termo:string) : Observable<Object> {
+        let urlRequest = `${URL_API}?descricao_oferta_like=${termo}`;
+        return this.http.get(urlRequest);
     }
     public getOfertasAsync(destaque:boolean, categoria: string): Promise<Ofertas[]> {
         const objParameters = [
