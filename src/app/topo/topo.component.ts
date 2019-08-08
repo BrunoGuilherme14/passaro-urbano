@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { Ofertas } from '../shared/ofertas.model';
-import { debounceTime, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, switchMap, distinctUntilChanged, catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-topo',
@@ -26,9 +26,12 @@ export class TopoComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(termo => {
-        if(termo.length) return this.ofertasService.getOfertasObsByTermo(termo);
-        return this.ofertas = [];
-      })
-    ).subscribe((res:Ofertas[]) => this.ofertas = res);
+        return (termo.trim().length)? this.ofertasService.getOfertasObsByTermo(termo): of<Ofertas[]>([])
+      }),
+      catchError(val => of<Ofertas[]>([]))
+    ).subscribe(
+      (res:Ofertas[]) => this.ofertas = res,
+      ((res:Error) => console.log(res))
+    );
   }
 }

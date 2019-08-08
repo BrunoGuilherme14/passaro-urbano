@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Ofertas } from './shared/ofertas.model';
 import {URL_API}  from './url.api';
 import { Observable } from 'rxjs';
+import { retry, map } from 'rxjs/operators';
 
 @Injectable()
 export class OfertasService {
@@ -12,9 +13,12 @@ export class OfertasService {
             .toPromise()
             .then((res:any) => res.shift())
     }
-    public getOfertasObsByTermo(termo:string) : Observable<Object> {
+    public getOfertasObsByTermo(termo:string) : Observable<Ofertas[]> {
         let urlRequest = `${URL_API}?descricao_oferta_like=${termo}`;
-        return this.http.get(urlRequest);
+        return this.http.get(urlRequest).pipe(
+            retry(5),
+            map((res:Ofertas[]) => res)
+        )
     }
     public getOfertasAsync(destaque:boolean, categoria: string): Promise<Ofertas[]> {
         const objParameters = [

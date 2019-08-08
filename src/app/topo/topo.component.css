@@ -1,4 +1,4 @@
-.menu {
+.navbar-default {
     background: #006ACB
 }
 
@@ -21,4 +21,13 @@
 
 .active {
     color: #FFF 
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #006ACB;
+    background: #ffffff
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
 }
