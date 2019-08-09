@@ -37,7 +37,7 @@
               (keyup)="pesquisaTermo(inputBusca.value)"
             />
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li *ngFor="let oferta of ofertas"><a [routerLink]="['/oferta', oferta.id]">{{oferta.titulo}}</a></li>
+              <li *ngFor="let oferta of ofertas"><a [routerLink]="['/oferta', oferta.id]">{{oferta.titulo | descricaoReduzida:15}}</a></li>
             </ul>
           </div>
         </form>
