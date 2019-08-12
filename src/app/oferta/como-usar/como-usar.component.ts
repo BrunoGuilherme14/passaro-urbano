@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import { ComoUsarService } from 'src/app/como.usar.service';
 
 @Component({
@@ -16,10 +16,13 @@ export class ComoUsarComponent implements OnInit {
   constructor(private route:ActivatedRoute, private comoUsarService: ComoUsarService) { }
 
   ngOnInit() {
-    const paramParent = this.route.parent.snapshot.params['id'];
-    this.comoUsarService.getComoUsar(paramParent).then((descricao:string)=>{
-      this.comoUsar = descricao;
+    this.route.parent.params.subscribe((params:Params) => {
+      this.comoUsarService.getComoUsar(params['id']).then((descricao:string)=>{
+        this.comoUsar = descricao;
+      })
     })
+
+    
   }
 
 }

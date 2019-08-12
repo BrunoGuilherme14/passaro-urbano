@@ -17,8 +17,12 @@ export class TopoComponent implements OnInit {
   private termoSubject: Subject<string> = new Subject<string>();
   public ofertas: Ofertas[] = [];
 
-  pesquisaTermo(termo:string) : void {
+  public pesquisaTermo(termo:string) : void {
     this.termoSubject.next(termo);
+  }
+  public limpaCampo(inputBusca:HTMLInputElement):void {
+    inputBusca.value = '';
+    this.termoSubject.next(inputBusca.value);
   }
 
   ngOnInit() {
