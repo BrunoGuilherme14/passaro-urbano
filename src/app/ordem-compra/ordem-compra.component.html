@@ -69,7 +69,7 @@
       <div class="form-row">
 
         <div class="form-group col-md-6">
-          <input type="text" class="form-control is-invalid" placeholder="Endereço" autocomplete="off" minlength="5" 
+          <input type="text" class="form-control {{enderecoValido === undefined? '': enderecoValido? 'is-valid' : 'is-invalid'}}" placeholder="Endereço" autocomplete="off" minlength="5" 
             required
             [value]="endereco"
             #valorEndereco
@@ -79,18 +79,20 @@
         </div>
 
         <div class="form-group col-md-2">
-          <input type="text" class="form-control is-valid" placeholder="Número" autocomplete="off" minlength="1" 
+          <input type="number" class="form-control {{numeroValido === undefined? '': numeroValido == true? 'is-valid' : 'is-invalid'}}" placeholder="Número" autocomplete="off" minlength="1" 
             required
             [value]="numero | number"
             #valorNumero
             (input)="atualizaNumero(valorNumero.value)"
           >
-          <br />
-          <small class="form-text text-muted">Ok</small>
+          <div *ngIf="numeroValido; else msgInvalido" class="valid-feedback">Número válido</div>
+          <ng-template #msgInvalido>
+            <div class="invalid-feedback">Número inválido</div>
+          </ng-template>
         </div>
 
         <div class="form-group col-md-4">
-          <input type="text" class="form-control" placeholder="Complemento" autocomplete="off" 
+          <input type="text" class="form-control {{complementoValido === undefined? '' : complementoValido? 'is-valid' : ''}}" placeholder="Complemento" autocomplete="off" 
             [value]="complemento"
             #valorComplemento
             (input)="atualizaComplemento(valorComplemento.value)"
@@ -106,7 +108,7 @@
       <div class="form-row">
           
         <div class="form-group col-md-3">
-          <select class="form-control is-invalid"
+          <select class="form-control {{formaPagamentoValido ===undefined? '' : formaPagamentoValido? 'is-valid' : 'is-invalid'}}"
             [value]="formaPagamento"
             #valorFormaPagamento
             (change)="atualizaFormaPagamento(valorFormaPagamento.value)"
@@ -121,7 +123,7 @@
       </div>
 
       <hr />
-      <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="botaoForm">Cofirmar compra</button>
     </form>
   </div>
 </div>
