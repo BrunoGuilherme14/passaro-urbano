@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdemCompraService } from '../ordem-compra.service';
+import { OrdemCompraModel } from '../shared/ordem-compra.model';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -12,6 +13,9 @@ import { OrdemCompraService } from '../ordem-compra.service';
 export class OrdemCompraComponent implements OnInit {
 
   constructor(private ordemCompraService: OrdemCompraService) { }
+
+  public pedido: OrdemCompraModel;
+
   public endereco: string = ''
   public numero: number
   public complemento: string = ''
@@ -27,8 +31,11 @@ export class OrdemCompraComponent implements OnInit {
 // Controle de ativação do botão submit
   public botaoForm: string = 'disabled';
 
+// Atibuto para componente de sucesso
+  public idPedido: number;
+
   ngOnInit() {
-    console.log(this.ordemCompraService.realizarCompra());
+    
   }
   public atualizaEndereco(endereco:string) :void {
     this.endereco = endereco;
@@ -53,5 +60,15 @@ export class OrdemCompraComponent implements OnInit {
 
   public habilitaForm():void{
     this.botaoForm = (this.numeroValido && this.enderecoValido && this.formaPagamentoValido? '' : 'disabled');
+  }
+
+  public confirmarCompra(): void {
+    this.pedido = new OrdemCompraModel(this.endereco, this.numero, this.complemento, this.formaPagamento);
+    this.ordemCompraService.realizarCompra(this.pedido).subscribe(
+      (res:OrdemCompraModel) => {
+        this.idPedido = res.numero;
+      },
+      ((res:Error) => console.log(res))
+    );
   }
 }
