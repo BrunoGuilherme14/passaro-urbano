@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { OrdemCompraService } from '../ordem-compra.service';
 import { OrdemCompraModel } from '../shared/ordem-compra.model';
 
@@ -63,10 +63,10 @@ export class OrdemCompraComponent implements OnInit {
   }
 
   public confirmarCompra(): void {
-    this.pedido = new OrdemCompraModel(this.endereco, this.numero, this.complemento, this.formaPagamento);
+    this.pedido = new OrdemCompraModel(Optional() ,this.endereco, this.numero, this.complemento, this.formaPagamento);
     this.ordemCompraService.realizarCompra(this.pedido).subscribe(
       (res:OrdemCompraModel) => {
-        this.idPedido = res.numero;
+        this.idPedido = res.id;
       },
       ((res:Error) => console.log(res))
     );
