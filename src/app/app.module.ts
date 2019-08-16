@@ -21,6 +21,7 @@ import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component';
+import { PedidoTemplateFormsComponent } from './pedido-template-forms/pedido-template-forms.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
     OndeFicaComponent,
     DescricaoReduzida,
     OrdemCompraComponent,
-    OrdemCompraSucessoComponent
+    OrdemCompraSucessoComponent,
+    PedidoTemplateFormsComponent
   ],
   imports: [
     BrowserModule,
