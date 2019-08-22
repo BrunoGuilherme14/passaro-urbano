@@ -1,7 +1,7 @@
 <div class="container">
     <div class="ordem-compra">
-    
-      <form #formPedido="ngForm" (ngSubmit)="realizarCompra(formPedido)" novalidate>
+      
+      <form #formPedido="ngForm" (ngSubmit)="realizarCompra()" novalidate *ngIf="!idPedido">
       
         <h5>Sua Compra</h5>
         <hr />
@@ -77,8 +77,10 @@
               required
               name="endereco"
               ngModel
+              #inputEndereco="ngModel"
             >
-            <small class="form-text text-danger">Endereço inválido</small>
+            <small *ngIf="inputEndereco.invalid && inputEndereco.touched" class="form-text text-danger">Endereço inválido</small>
+            <small *ngIf="inputEndereco.valid && inputEndereco.touched" class="form-text text-success">Endereço Válido</small>
           </div>
   
           <div class="form-group col-md-2">
@@ -91,8 +93,11 @@
               required
               name="numero"
               ngModel
+              #inputNumero="ngModel"
+              pattern="[0-9]+"
             >
-            <small class="form-text text-success">Ok</small>
+            <small *ngIf="inputNumero.invalid && inputNumero.touched" class="form-text text-danger">Número Inválido</small>
+            <small *ngIf="inputNumero.valid && inputNumero.touched" class="form-text text-success">Ok</small>
           </div>
   
           <div class="form-group col-md-4">
@@ -120,12 +125,14 @@
               name="formaPagamento"
               ngModel
               required
+              #selectFormaPagamento="ngModel"
             >
               <option value="">Selecione uma opção</option>
               <option value="dinheiro">Dinheiro</option>
               <option value="debito">Débito</option>
             </select>
-            <small class="form-text text-danger">Forma de pagamento inválida</small>
+            <small *ngIf="selectFormaPagamento.valid && selectFormaPagamento.touched" class="form-text text-success">Forma de pagamento Válida</small>
+            <small *ngIf="selectFormaPagamento.invalid && selectFormaPagamento.touched" class="form-text text-danger">Forma de pagamento inválida</small>
           </div>
         </div>
   
@@ -135,5 +142,7 @@
           class="btn btn-primary btn-lg"
         >Cofirmar compra</button>
       </form>
+
+      <app-ordem-compra-sucesso *ngIf="idPedido" [idPedidoCompra]="idPedido"></app-ordem-compra-sucesso>
     </div>
   </div>

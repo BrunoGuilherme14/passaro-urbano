@@ -21,8 +21,6 @@ export class ComoUsarComponent implements OnInit {
         this.comoUsar = descricao;
       })
     })
-
-    
   }
 
 }
