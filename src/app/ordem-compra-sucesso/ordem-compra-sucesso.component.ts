@@ -12,5 +12,4 @@ export class OrdemCompraSucessoComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
