@@ -18,11 +18,10 @@ export class PedidoTemplateFormsComponent implements OnInit {
   @ViewChild('formPedido', {static: false}) public formPedido: NgForm;
   
   ngOnInit() {}
-  onSubmit() { this.submitted = true}
 
   public realizarCompra(): void {
+    this.submitted = true
     let formPedido: OrdemCompraModel = this.formPedido.form.value;
-    console.log(this.formPedido.form)
     if(this.formPedido.form.valid) {
       this.ordemCompraService.realizarCompra(formPedido).subscribe(
         (res:OrdemCompraModel) => {

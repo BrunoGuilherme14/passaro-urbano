@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdemCompraService } from '../ordem-compra.service';
 import { OrdemCompraModel } from '../shared/ordem-compra.model';
 
@@ -13,25 +13,28 @@ import { OrdemCompraModel } from '../shared/ordem-compra.model';
   ]
 })
 export class PedidoReactiveFormsComponent implements OnInit {
-  public pedido: OrdemCompraModel;
+  public submitted: boolean = false;
   public formPedido: FormGroup = new FormGroup({
-    'endereco': new FormControl(null),
-    'numero': new FormControl(null),
+    'endereco': new FormControl(null, [Validators.required, Validators.minLength(5)]),
+    'numero': new FormControl(null, [Validators.required, Validators.pattern("[0-9]+")]),
     'complemento': new FormControl(null),
-    'formaPagamento': new FormControl(null),
+    'formaPagamento': new FormControl(null, [Validators.required]),
   });
   constructor(private ordemCompraService: OrdemCompraService) { }
 
   ngOnInit() {
   }
   public realizarCompra(): void {
-    this.ordemCompraService.realizarCompra(this.pedido).subscribe(
-      (res: OrdemCompraModel) => {
-        console.log(res)
-      },
-      (error:Error) => {
-        console.log(error)
-      }
-    )
+    this.submitted = true;
+    if(this.formPedido.valid) {
+      this.ordemCompraService.realizarCompra(this.formPedido.value).subscribe(
+        (res: OrdemCompraModel) => {
+          console.log(res)
+        },
+        (error:Error) => {
+          console.log(error)
+        }
+      )
+    }
   }
 }
