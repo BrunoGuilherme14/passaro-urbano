@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
-import {FormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr)
@@ -22,6 +22,7 @@ import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component';
 import { PedidoTemplateFormsComponent } from './pedido-template-forms/pedido-template-forms.component';
+import { PedidoReactiveFormsComponent } from './pedido-reactive-forms/pedido-reactive-forms.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,14 @@ import { PedidoTemplateFormsComponent } from './pedido-template-forms/pedido-tem
     DescricaoReduzida,
     OrdemCompraComponent,
     OrdemCompraSucessoComponent,
-    PedidoTemplateFormsComponent
+    PedidoTemplateFormsComponent,
+    PedidoReactiveFormsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [

@@ -7,6 +7,7 @@ import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 import { PedidoTemplateFormsComponent } from './pedido-template-forms/pedido-template-forms.component';
+import { PedidoReactiveFormsComponent } from './pedido-reactive-forms/pedido-reactive-forms.component';
 
 export const ROUTES: Routes = [
     {path: '', component : HomeComponent},
@@ -20,5 +21,6 @@ export const ROUTES: Routes = [
         ]
     },
     {path: 'ordem-compra', component: OrdemCompraComponent},
-    {path: 'pedido', component: PedidoTemplateFormsComponent}
+    {path: 'pedido', component: PedidoTemplateFormsComponent},
+    {path: 'pedido-reactive-forms', component: PedidoReactiveFormsComponent}
 ]
