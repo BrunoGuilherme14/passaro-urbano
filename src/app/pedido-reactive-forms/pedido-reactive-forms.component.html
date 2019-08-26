@@ -75,8 +75,8 @@
             autocomplete="off" 
             formControlName="endereco"
           >
-          <small *ngIf="formPedido.get('endereco').invalid && (formPedido.get('endereco').touched)" class="form-text text-danger">Endereço inválido</small>
-          <small *ngIf="formPedido.get('endereco').valid && (formPedido.get('endereco').touched)" class="form-text text-success">Endereço Válido</small>
+          <small *ngIf="formPedido.get('endereco').invalid && formPedido.get('endereco').touched" class="form-text text-danger">Endereço inválido</small>
+          <small *ngIf="formPedido.get('endereco').valid && formPedido.get('endereco').touched" class="form-text text-success">Endereço Válido</small>
         </div>
 
         <div class="form-group col-md-2">
@@ -87,8 +87,8 @@
             autocomplete="off"
             formControlName="numero"
           >
-          <small *ngIf="formPedido.get('numero').invalid && (formPedido.get('numero').touched)" class="form-text text-danger">Número Inválido</small>
-          <small *ngIf="formPedido.get('numero').valid && (formPedido.get('numero').touched)" class="form-text text-success">Ok</small>
+          <small *ngIf="formPedido.get('numero').invalid && formPedido.get('numero').touched" class="form-text text-danger">Número Inválido</small>
+          <small *ngIf="formPedido.get('numero').valid && formPedido.get('numero').touched" class="form-text text-success">Ok</small>
         </div>
 
         <div class="form-group col-md-4">
@@ -118,8 +118,8 @@
             <option value="dinheiro">Dinheiro</option>
             <option value="debito">Débito</option>
           </select>
-          <small *ngIf="formPedido.get('formaPagamento').valid && (formPedido.get('formaPagamento').touched)" class="form-text text-success">Forma de pagamento Válida</small>
-          <small *ngIf="formPedido.get('formaPagamento').invalid && (formPedido.get('formaPagamento').touched)" class="form-text text-danger">Forma de pagamento inválida</small>
+          <small *ngIf="formPedido.get('formaPagamento').valid && formPedido.get('formaPagamento').touched" class="form-text text-success">Forma de pagamento Válida</small>
+          <small *ngIf="formPedido.get('formaPagamento').invalid && formPedido.get('formaPagamento').touched" class="form-text text-danger">Forma de pagamento inválida</small>
         </div>
       </div>
 

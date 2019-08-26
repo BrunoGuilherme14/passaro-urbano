@@ -33,7 +33,7 @@ export class PedidoReactiveFormsComponent implements OnInit {
           this.idPedido = res.id;
         },
         (error:Error) => {
-          console.log(error)
+          console.log(error);
         }
       )
     }
