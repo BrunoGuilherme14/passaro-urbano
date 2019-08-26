@@ -13,6 +13,7 @@ import { OrdemCompraModel } from '../shared/ordem-compra.model';
   ]
 })
 export class PedidoReactiveFormsComponent implements OnInit {
+  public idPedido:number;
   public submitted: boolean = false;
   public formPedido: FormGroup = new FormGroup({
     'endereco': new FormControl(null, [Validators.required, Validators.minLength(5)]),
@@ -29,12 +30,16 @@ export class PedidoReactiveFormsComponent implements OnInit {
     if(this.formPedido.valid) {
       this.ordemCompraService.realizarCompra(this.formPedido.value).subscribe(
         (res: OrdemCompraModel) => {
-          console.log(res)
+          this.idPedido = res.id;
         },
         (error:Error) => {
           console.log(error)
         }
       )
     }
+  }
+  public novoPedido() :void {
+    this.formPedido.reset();
+    this.idPedido  = undefined;
   }
 }
