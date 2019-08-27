@@ -12,16 +12,14 @@ import { OrdemCompraService } from '../ordem-compra.service';
 })
 export class PedidoTemplateFormsComponent implements OnInit {
   public idPedido: number;
-  public submitted:boolean = false;
-
   constructor(private ordemCompraService: OrdemCompraService) { }
   @ViewChild('formPedido', {static: false}) public formPedido: NgForm;
   
   ngOnInit() {}
 
   public realizarCompra(): void {
-    this.submitted = true
     let formPedido: OrdemCompraModel = this.formPedido.form.value;
+    this.formPedido.form.markAllAsTouched();
     if(this.formPedido.form.valid) {
       this.ordemCompraService.realizarCompra(formPedido).subscribe(
         (res:OrdemCompraModel) => {

@@ -14,7 +14,6 @@ import { OrdemCompraModel } from '../shared/ordem-compra.model';
 })
 export class PedidoReactiveFormsComponent implements OnInit {
   public idPedido:number;
-  public submitted: boolean = false;
   public formPedido: FormGroup = new FormGroup({
     'endereco': new FormControl(null, [Validators.required, Validators.minLength(5)]),
     'numero': new FormControl(null, [Validators.required, Validators.pattern("[0-9]+")]),
@@ -26,7 +25,7 @@ export class PedidoReactiveFormsComponent implements OnInit {
   ngOnInit() {
   }
   public realizarCompra(): void {
-    this.submitted = true;
+    this.formPedido.markAllAsTouched();
     if(this.formPedido.valid) {
       this.ordemCompraService.realizarCompra(this.formPedido.value).subscribe(
         (res: OrdemCompraModel) => {
