@@ -10,8 +10,7 @@ import { ItemCarrinho } from '../shared/item-carrinho.model';
   templateUrl: './oferta.component.html',
   styleUrls: ['./oferta.component.css'],
   providers: [
-    OfertasService,
-    CarrinhoService
+    OfertasService
   ]
 })
 export class OfertaComponent implements OnInit {
@@ -31,6 +30,6 @@ export class OfertaComponent implements OnInit {
   }
   public addCarrinho(): void {
     const itemCarrinho: ItemCarrinho = new ItemCarrinho(this.oferta.id, this.oferta.imagens[0], this.oferta.titulo, this.oferta.descricao_oferta, this.oferta.valor, 1);
-    this.carrinhoService.itemCarrinho.push(itemCarrinho);
+    this.carrinhoService.setCarrinho(itemCarrinho);
   }
 }

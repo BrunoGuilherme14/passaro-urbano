@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdemCompraService } from '../ordem-compra.service';
 import { OrdemCompraModel } from '../shared/ordem-compra.model';
-
+import { CarrinhoService } from '../carrinho.service';
+import { ItemCarrinho } from '../shared/item-carrinho.model';
 
 @Component({
   selector: 'app-pedido-reactive-forms',
@@ -13,6 +14,8 @@ import { OrdemCompraModel } from '../shared/ordem-compra.model';
   ]
 })
 export class PedidoReactiveFormsComponent implements OnInit {
+  public carrinho: ItemCarrinho[];
+  public totalPedido: number;
   public idPedido:number;
   public formPedido: FormGroup = new FormGroup({
     'endereco': new FormControl(null, [Validators.required, Validators.minLength(5)]),
@@ -20,9 +23,11 @@ export class PedidoReactiveFormsComponent implements OnInit {
     'complemento': new FormControl(null),
     'formaPagamento': new FormControl(null, [Validators.required]),
   });
-  constructor(private ordemCompraService: OrdemCompraService) { }
+  constructor(private ordemCompraService: OrdemCompraService, private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
+    this.carrinho = this.carrinhoService.getCarrinho();
+    this.totalPedido = this.carrinhoService.getTotal();
   }
   public realizarCompra(): void {
     this.formPedido.markAllAsTouched();
@@ -40,5 +45,13 @@ export class PedidoReactiveFormsComponent implements OnInit {
   public novoPedido() :void {
     this.formPedido.reset();
     this.idPedido  = undefined;
+  }
+  public addItemCarrinho(item: ItemCarrinho):void {
+    this.carrinhoService.setCarrinho(item);
+    this.totalPedido = this.carrinhoService.getTotal();
+  }
+  public removeItemCarrinho(item: ItemCarrinho):void {
+    this.carrinhoService.removeCarrinho(item);
+    this.totalPedido = this.carrinhoService.getTotal();
   }
 }

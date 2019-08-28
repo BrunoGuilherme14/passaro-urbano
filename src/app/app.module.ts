@@ -24,6 +24,8 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
 import { PedidoTemplateFormsComponent } from './pedido-template-forms/pedido-template-forms.component';
 import { PedidoReactiveFormsComponent } from './pedido-reactive-forms/pedido-reactive-forms.component';
 
+import { CarrinhoService } from './carrinho.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,8 @@ import { PedidoReactiveFormsComponent } from './pedido-reactive-forms/pedido-rea
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt' }
+    { provide: LOCALE_ID, useValue: 'pt' },
+    CarrinhoService
   ],
   bootstrap: [AppComponent]
 })
