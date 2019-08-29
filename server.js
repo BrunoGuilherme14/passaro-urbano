@@ -10,14 +10,3 @@ app.get('/*', (req, res) => {
 });
  
 app.listen(process.env.PORT || 8080);
-
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('./src/app/shared/banco-de-dados.json');
-const middlewares = jsonServer.defaults();
-const port = 4000;
-
-server.use(middlewares);
-server.use(router);
-
-server.listen(port);
