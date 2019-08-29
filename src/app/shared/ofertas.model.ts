@@ -6,5 +6,5 @@ export class Ofertas {
     anunciante: string
     valor: number
     destaque: boolean
-    imagens: Array<Object>
+    imagens: Array<any>
 }

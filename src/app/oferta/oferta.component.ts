@@ -15,7 +15,7 @@ import { ItemCarrinho } from '../shared/item-carrinho.model';
 })
 export class OfertaComponent implements OnInit {
   public oferta: Ofertas;
-  constructor(private route: ActivatedRoute, private ofertasService:OfertasService, private carrinhoService:CarrinhoService) { }
+  constructor(private route: ActivatedRoute, private ofertasService:OfertasService, public carrinhoService:CarrinhoService) { }
   ngOnInit() {
     /* Via Snapshot ao navegar apenas mudando o parâmetro da rota, os componentes não recarregam. */
     //let id:number = parseInt(this.route.snapshot.paramMap.get('id'));

@@ -22,7 +22,7 @@ export class PedidoReactiveFormsComponent implements OnInit {
     'complemento': new FormControl(null),
     'formaPagamento': new FormControl(null, [Validators.required]),
   });
-  constructor(private ordemCompraService: OrdemCompraService, private carrinhoService: CarrinhoService) { }
+  constructor(private ordemCompraService: OrdemCompraService, public carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
     this.carrinho = this.carrinhoService.getCarrinho();

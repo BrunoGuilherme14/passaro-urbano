@@ -1,6 +1,8 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { OrdemCompraService } from '../ordem-compra.service';
 import { OrdemCompraModel } from '../shared/ordem-compra.model';
+import { ItemCarrinho } from '../shared/item-carrinho.model';
+import { CarrinhoService } from '../carrinho.service';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -12,8 +14,8 @@ import { OrdemCompraModel } from '../shared/ordem-compra.model';
 })
 export class OrdemCompraComponent implements OnInit {
 
-  constructor(private ordemCompraService: OrdemCompraService) { }
-
+  constructor(private ordemCompraService: OrdemCompraService, public carrinhoService: CarrinhoService) { }
+  public carrinho: ItemCarrinho[];
   public pedido: OrdemCompraModel;
 
   public endereco: string = ''
@@ -35,7 +37,7 @@ export class OrdemCompraComponent implements OnInit {
   public idPedido: number;
 
   ngOnInit() {
-    
+    this.carrinho = this.carrinhoService.getCarrinho();
   }
   public atualizaEndereco(endereco:string) :void {
     this.endereco = endereco;
@@ -63,12 +65,22 @@ export class OrdemCompraComponent implements OnInit {
   }
 
   public confirmarCompra(): void {
-    this.pedido = new OrdemCompraModel(Optional() ,this.endereco, this.numero, this.complemento, this.formaPagamento);
+    this.pedido = new OrdemCompraModel(Optional() ,this.endereco, this.numero, this.complemento, this.formaPagamento, this.carrinhoService.getCarrinho());
     this.ordemCompraService.realizarCompra(this.pedido).subscribe(
       (res:OrdemCompraModel) => {
         this.idPedido = res.id;
       },
       ((res:Error) => console.log(res))
     );
+  }
+  public novoPedido() :void {
+    this.carrinho = this.carrinhoService.removeCarrinho(null);
+    this.idPedido  = undefined;
+  }
+  public addItemCarrinho(item: ItemCarrinho):void {
+    this.carrinhoService.setCarrinho(item);
+  }
+  public removeItemCarrinho(item: ItemCarrinho):void {
+    this.carrinhoService.removeCarrinho(item);
   }
 }

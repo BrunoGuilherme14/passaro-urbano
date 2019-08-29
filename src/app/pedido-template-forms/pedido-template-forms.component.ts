@@ -15,7 +15,7 @@ import { ItemCarrinho } from '../shared/item-carrinho.model';
 export class PedidoTemplateFormsComponent implements OnInit {
   public carrinho: ItemCarrinho[];
   public idPedido: number;
-  constructor(private ordemCompraService: OrdemCompraService, private carrinhoService: CarrinhoService) { }
+  constructor(private ordemCompraService: OrdemCompraService, public carrinhoService: CarrinhoService) { }
   @ViewChild('formPedido', {static: false}) public formPedido: NgForm;
   
   ngOnInit() {
