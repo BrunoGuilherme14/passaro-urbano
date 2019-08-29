@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Ofertas } from './shared/ofertas.model';
-import {URL_API}  from './url.api';
+import { Ofertas } from '../shared/ofertas.model';
 import { Observable } from 'rxjs';
 import { retry, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class OfertasService {
     constructor(private http:HttpClient) {}
     public getOferta(id:number) : Promise<Ofertas> {
-        return this.http.get(`${URL_API}?id=${id}`)
+        return this.http.get(`${environment.baseUrl}ofertas?id=${id}`)
             .toPromise()
             .then((res:any) => res.shift())
     }
     public getOfertasObsByTermo(termo:string) : Observable<Ofertas[]> {
-        let urlRequest = `${URL_API}?descricao_oferta_like=${termo}`;
+        let urlRequest = `${environment.baseUrl}ofertas?descricao_oferta_like=${termo}`;
         return this.http.get(urlRequest).pipe(
             retry(5),
             map((res:Ofertas[]) => res)
@@ -31,7 +31,7 @@ export class OfertasService {
                 value: categoria
             }
         ];
-        let urlRequest = URL_API;
+        let urlRequest = environment.baseUrl + 'ofertas';
         let indexRequest = 0;
         for(let parameter of objParameters) {
             if(parameter.value) {

@@ -1,8 +1,8 @@
 import { Component, OnInit, Optional } from '@angular/core';
-import { OrdemCompraService } from '../ordem-compra.service';
 import { OrdemCompraModel } from '../shared/ordem-compra.model';
 import { ItemCarrinho } from '../shared/item-carrinho.model';
-import { CarrinhoService } from '../carrinho.service';
+import { CarrinhoService } from '../services/carrinho.service';
+import { OrdemCompraService } from '../services/ordem-compra.service';
 
 @Component({
   selector: 'app-ordem-compra',

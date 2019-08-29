@@ -1,8 +1,8 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OfertasService } from '../ofertas.service';
 import { Ofertas } from '../shared/ofertas.model';
-import { CarrinhoService } from '../carrinho.service';
+import { OfertasService } from '../services/ofertas.service';
+import { CarrinhoService } from '../services/carrinho.service';
 import { ItemCarrinho } from '../shared/item-carrinho.model';
 
 @Component({

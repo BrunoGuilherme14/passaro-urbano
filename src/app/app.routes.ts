@@ -22,5 +22,5 @@ export const ROUTES: Routes = [
     },
     {path: 'ordem-compra', component: OrdemCompraComponent},
     {path: 'pedido', component: PedidoTemplateFormsComponent},
-    {path: 'pedido-reactive-forms', component: PedidoReactiveFormsComponent}
+    {path: 'carrinho', component: PedidoReactiveFormsComponent}
 ]

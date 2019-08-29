@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, Optional } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { OrdemCompraModel } from '../shared/ordem-compra.model';
-import { OrdemCompraService } from '../ordem-compra.service';
-import { CarrinhoService } from '../carrinho.service';
 import { ItemCarrinho } from '../shared/item-carrinho.model';
+import { OrdemCompraService } from '../services/ordem-compra.service';
+import { CarrinhoService } from '../services/carrinho.service';
+
 @Component({
   selector: 'app-pedido-template-forms',
   templateUrl: './pedido-template-forms.component.html',

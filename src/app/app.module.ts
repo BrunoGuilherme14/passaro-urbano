@@ -24,7 +24,7 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
 import { PedidoTemplateFormsComponent } from './pedido-template-forms/pedido-template-forms.component';
 import { PedidoReactiveFormsComponent } from './pedido-reactive-forms/pedido-reactive-forms.component';
 
-import { CarrinhoService } from './carrinho.service';
+import { CarrinhoService } from './services/carrinho.service';
 
 @NgModule({
   declarations: [

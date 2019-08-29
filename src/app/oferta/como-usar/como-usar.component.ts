@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import { ComoUsarService } from 'src/app/como.usar.service';
+import { ComoUsarService } from '../../services/como.usar.service';
 
 @Component({
   selector: 'app-como-usar',
@@ -22,5 +22,4 @@ export class ComoUsarComponent implements OnInit {
       })
     })
   }
-
 }
