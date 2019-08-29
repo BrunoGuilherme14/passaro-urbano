@@ -36,7 +36,7 @@
         
         <div class="form-row">
           <div class="form-group col d-flex justify-content-end">
-            <h4>Total do pedido: {{totalPedido | currency:'R$'}}</h4>
+            <h4>Total do pedido: {{this.carrinhoService.getTotal() | currency:'R$'}}</h4>
           </div>
         </div>
         <br />

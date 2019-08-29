@@ -22,27 +22,28 @@ export class CarrinhoService {
         return this.itemCarrinho;
     }
     public setCarrinho(item:ItemCarrinho): void {
-        const indexItemCarrinho = this.itemCarrinho.map(v=>v.id).indexOf(item.id);
+        const indexItemCarrinho = this.itemCarrinho.map((v:ItemCarrinho)=>v.id).indexOf(item.id);
         if(indexItemCarrinho == -1) {
             this.itemCarrinho.push(item);
         } else {
             this.itemCarrinho[indexItemCarrinho].quantidade += 1;
         }
     }
-    public removeCarrinho(item:ItemCarrinho): void {
+    public removeCarrinho(item:ItemCarrinho): ItemCarrinho[] {
         if(item) {
-            const indexItemCarrinho = this.itemCarrinho.map(v=>v.id).indexOf(item.id);
+            //Outro método para obter o item desejado
+            //const itemCarrinho = this.itemCarrinho.find((v:ItemCarrinho)=>v.id == item.id);
+            const indexItemCarrinho = this.itemCarrinho.map((v:ItemCarrinho)=>v.id).indexOf(item.id);
             this.itemCarrinho[indexItemCarrinho].quantidade > 0? this.itemCarrinho[indexItemCarrinho].quantidade -= 1 : ''
         } else {
             this.itemCarrinho = [];
         }
+        return this.itemCarrinho
     }
     public getTotal(): number {
         let total:number = 0;
         for(let item of this.itemCarrinho) {
-            for(let i=0; i < item.quantidade; i++) {
-                total += item.valor
-            }
+            total += item.valor * item.quantidade;
         }
         return total;
     }

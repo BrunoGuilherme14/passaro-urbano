@@ -14,20 +14,18 @@ import { ItemCarrinho } from '../shared/item-carrinho.model';
 })
 export class PedidoTemplateFormsComponent implements OnInit {
   public carrinho: ItemCarrinho[];
-  public totalPedido: number;
   public idPedido: number;
   constructor(private ordemCompraService: OrdemCompraService, private carrinhoService: CarrinhoService) { }
   @ViewChild('formPedido', {static: false}) public formPedido: NgForm;
   
   ngOnInit() {
     this.carrinho = this.carrinhoService.getCarrinho();
-    this.totalPedido = this.carrinhoService.getTotal();
   }
 
   public realizarCompra(): void {
     let formPedido: OrdemCompraModel = this.formPedido.form.value;
     this.formPedido.form.markAllAsTouched();
-    if(this.formPedido.form.valid) {
+    if(this.formPedido.form.valid  && this.carrinhoService.getTotal()) {
       this.ordemCompraService.realizarCompra(formPedido).subscribe(
         (res:OrdemCompraModel) => {
           this.idPedido = res.id;
@@ -44,10 +42,8 @@ export class PedidoTemplateFormsComponent implements OnInit {
   }
   public addItemCarrinho(item: ItemCarrinho):void {
     this.carrinhoService.setCarrinho(item);
-    this.totalPedido = this.carrinhoService.getTotal();
   }
   public removeItemCarrinho(item: ItemCarrinho):void {
     this.carrinhoService.removeCarrinho(item);
-    this.totalPedido = this.carrinhoService.getTotal();
   }
 } 

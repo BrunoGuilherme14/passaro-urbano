@@ -15,7 +15,6 @@ import { ItemCarrinho } from '../shared/item-carrinho.model';
 })
 export class PedidoReactiveFormsComponent implements OnInit {
   public carrinho: ItemCarrinho[];
-  public totalPedido: number;
   public idPedido:number;
   public formPedido: FormGroup = new FormGroup({
     'endereco': new FormControl(null, [Validators.required, Validators.minLength(5)]),
@@ -27,12 +26,12 @@ export class PedidoReactiveFormsComponent implements OnInit {
 
   ngOnInit() {
     this.carrinho = this.carrinhoService.getCarrinho();
-    this.totalPedido = this.carrinhoService.getTotal();
   }
   public realizarCompra(): void {
     this.formPedido.markAllAsTouched();
-    if(this.formPedido.valid) {
-      this.ordemCompraService.realizarCompra(this.formPedido.value).subscribe(
+    if(this.formPedido.valid && this.carrinhoService.getTotal()) {
+      const pedidoCompleto: OrdemCompraModel = new OrdemCompraModel(this.formPedido.value.id, this.formPedido.value.endereco, this.formPedido.value.numero, this.formPedido.value.complemento, this.formPedido.value.formaPagamento, this.carrinhoService.getCarrinho());
+      this.ordemCompraService.realizarCompra(pedidoCompleto).subscribe(
         (res: OrdemCompraModel) => {
           this.idPedido = res.id;
         },
@@ -43,15 +42,14 @@ export class PedidoReactiveFormsComponent implements OnInit {
     }
   }
   public novoPedido() :void {
+    this.carrinho = this.carrinhoService.removeCarrinho(null);
     this.formPedido.reset();
     this.idPedido  = undefined;
   }
   public addItemCarrinho(item: ItemCarrinho):void {
     this.carrinhoService.setCarrinho(item);
-    this.totalPedido = this.carrinhoService.getTotal();
   }
   public removeItemCarrinho(item: ItemCarrinho):void {
     this.carrinhoService.removeCarrinho(item);
-    this.totalPedido = this.carrinhoService.getTotal();
   }
 }

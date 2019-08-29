@@ -1,4 +1,5 @@
 import { Optional } from '@angular/core';
+import { ItemCarrinho } from './item-carrinho.model';
 
 export class OrdemCompraModel {
     constructor(
@@ -6,6 +7,7 @@ export class OrdemCompraModel {
         public endereco:string,
         public numero:number,
         public complemento:string,
-        public formaPagamento:string
+        public formaPagamento:string,
+        public pedido: ItemCarrinho[]
     ){}
 }
