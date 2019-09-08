@@ -5,7 +5,7 @@ const app = express();
  
 app.use(express.static('./dist/passaro-urbano'));
  
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join('./dist/passaro-urbano/index.html'));
 });
  

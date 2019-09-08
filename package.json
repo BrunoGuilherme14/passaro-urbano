@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot --configuration=production",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --aot --configuration=production"
   },
   "engines": {
     "node": "10.16.0",
