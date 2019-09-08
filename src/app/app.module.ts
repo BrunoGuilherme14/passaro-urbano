@@ -48,7 +48,7 @@ import { CarrinhoService } from './services/carrinho.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES,{ useHash: true })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
